@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HudManager : MonoBehaviour
 {
@@ -102,6 +103,8 @@ public class HudManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         enfantParole4.SetActive(true);
         endTalk = true;
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(1);
     }
 
 }

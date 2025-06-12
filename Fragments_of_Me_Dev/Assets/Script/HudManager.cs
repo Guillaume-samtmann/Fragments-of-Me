@@ -14,6 +14,9 @@ public class HudManager : MonoBehaviour
     public GameObject enfantParole3;
     public GameObject enfantParole4;
 
+    [Header("Scene d'ouverture")]
+    public GameObject ouverture;
+
     public bool endFirstTalk = false;
     public bool endTalk = false;
     private bool coroutineLancee = false;
@@ -29,12 +32,14 @@ public class HudManager : MonoBehaviour
     IEnumerator HiddenZqsd()
     {
         yield return new WaitForSeconds(2);
+        ouverture.SetActive(false);
+        yield return new WaitForSeconds(2);
         zqdsDeplacement.SetActive(false);
     }
 
     private void Update()
     {
-        if (!endFirstTalk)
+        if (!endFirstTalk && triggeurDeclencheur.isCollTriggeur)
         {
             HiddenInstruction1();
 
@@ -63,7 +68,7 @@ public class HudManager : MonoBehaviour
     IEnumerator paroleManager()
     {
         enfantParole1.SetActive(true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
 
         enfantParole1.SetActive(false);
         enfantParole2.SetActive(true);
@@ -97,7 +102,6 @@ public class HudManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         enfantParole4.SetActive(true);
         endTalk = true;
-        
     }
 
 }

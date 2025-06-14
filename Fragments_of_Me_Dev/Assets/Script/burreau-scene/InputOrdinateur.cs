@@ -13,7 +13,7 @@ public class InputOrdinateur : MonoBehaviour
     public TMP_InputField inputEdf1;
     public TMP_InputField inputEdf2;
 
-    private bool complete1 = false;
+    public bool complete1 = false;
     private bool complete2 = false;
     private bool complete3 = false;
     private bool complete4 = false;
@@ -21,11 +21,20 @@ public class InputOrdinateur : MonoBehaviour
     private bool complete6 = false;
     private bool complete7 = false;
     private bool complete8 = false;
+    private bool canLook = true;
 
-    private bool allComplete = false;
+    public bool allComplete = false;
     public bool loadCoroutine = true;
 
     public GameObject fishExecl;
+
+    public GameObject excelInterface;
+    public GameObject mailActive;
+    public GameObject mailActiveReproche;
+    public GameObject mailInactiveUrg;
+    public GameObject mailReprocheLecture;
+    public GameObject mailUrgLecture;
+    public GameObject showNotif;
 
     private void Update()
     {
@@ -33,17 +42,41 @@ public class InputOrdinateur : MonoBehaviour
         if(complete1 && complete2 && complete3 && complete4 && complete5 && complete6 && complete7 && complete8)
         {
             allComplete = true;
+            canLook = false;
         }
 
         if (loadCoroutine)
         {
             StartCoroutine(fishMissionExcel());
         }
+
+        if (allComplete)
+        {
+            mailActive.SetActive(false);
+            mailActiveReproche.SetActive(true);
+            mailInactiveUrg.SetActive(true);
+            mailReprocheLecture.SetActive(true);
+            mailUrgLecture.SetActive(false);
+            showNotif.SetActive(true);
+        }
+
+        if(!excelInterface.activeInHierarchy)
+        {
+            complete1 = false;
+            complete2 = false;
+            complete3 = false;
+            complete4 = false;
+            complete5 = false;
+            complete6 = false;
+            complete7 = false;
+            complete8 = false;
+            allComplete = false;
+        }
     }
 
     public void CompleteInput()
     {
-        if(!allComplete)
+        if(!allComplete && canLook)
         {
             if (inputReport.text == "10000" || inputReport.text == "10 000")
             {
@@ -96,6 +129,7 @@ public class InputOrdinateur : MonoBehaviour
             yield return new WaitForSeconds(3);
             fishExecl.SetActive(false);
             loadCoroutine = false;
+            canLook = false;
         }
     }
 }

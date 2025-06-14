@@ -9,6 +9,8 @@ public class UiOrdinateur : MonoBehaviour
 
     public GameObject btnExcel;
 
+    public InputOrdinateur inputOrdinateur;
+
     private void Start()
     {
         Cursor.visible = true;
@@ -20,6 +22,7 @@ public class UiOrdinateur : MonoBehaviour
         panelMail.SetActive(true);
         panelAccueil.SetActive(false);
         panelExcel.SetActive(false);
+        inputOrdinateur.showNotif.SetActive(false);
     }
 
     public void ShowAccueil()

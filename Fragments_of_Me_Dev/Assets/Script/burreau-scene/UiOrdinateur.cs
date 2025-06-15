@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,10 +7,13 @@ public class UiOrdinateur : MonoBehaviour
     public GameObject panelAccueil;
     public GameObject panelMail;
     public GameObject panelExcel;
+    public GameObject discussion;
 
     public GameObject btnExcel;
 
     public InputOrdinateur inputOrdinateur;
+
+    private bool loadCoroutine = true;
 
     private void Start()
     {
@@ -17,13 +21,33 @@ public class UiOrdinateur : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
+    private void Update()
+    {
+        if(panelMail.activeInHierarchy)
+        {
+            inputOrdinateur.showNotif.SetActive(false);
+
+            if (inputOrdinateur.mailReprocheLecture.activeInHierarchy)
+            {
+                if (loadCoroutine)
+                {
+                    StartCoroutine(loadDiscussion());
+                }
+            }
+        }
+    }
+
     public void ShowMailInterface()
     {
+        inputOrdinateur.loadCoroutine = false;
+        inputOrdinateur.allComplete = false;
+        inputOrdinateur.showNotif.SetActive(false);
+
         panelMail.SetActive(true);
         panelAccueil.SetActive(false);
         panelExcel.SetActive(false);
-        inputOrdinateur.showNotif.SetActive(false);
     }
+
 
     public void ShowAccueil()
     {
@@ -41,5 +65,15 @@ public class UiOrdinateur : MonoBehaviour
     {
         btnExcel.SetActive(true);
         panelExcel.SetActive(true);
+        panelMail.SetActive(false);
+    }
+
+    IEnumerator loadDiscussion()
+    {
+        loadCoroutine = false;
+        yield return new WaitForSeconds(30);
+        discussion.SetActive(true);
+        yield return new WaitForSeconds(5);
+        discussion.SetActive(false);
     }
 }

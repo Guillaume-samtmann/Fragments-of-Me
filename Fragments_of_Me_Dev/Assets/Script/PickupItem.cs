@@ -18,7 +18,7 @@ public class PickupItem : MonoBehaviour
     {
         heldVersion.SetActive(false);
         SetRenderersActive(true);
-        transform.position = position * 1.2f;
+        transform.position = position;
         isHeld = false;
     }
 

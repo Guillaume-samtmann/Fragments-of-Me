@@ -13,6 +13,10 @@ public class UiInteraction : MonoBehaviour
         {
             inscrution.text = "Déposer la boite sur le burreau";
         }
+        else
+        {
+            inscrution.text = "";
+        }
     }   
 
     private void FixedUpdate()

@@ -9,6 +9,7 @@ public class CanOpenBoxTriggeur : MonoBehaviour
 
     private bool isCollTriggeur = false;
     public bool boxIsColl = false;
+    private bool inCollid = false;
 
     public Text objText;
     public TextMeshProUGUI inscrution;
@@ -51,9 +52,10 @@ public class CanOpenBoxTriggeur : MonoBehaviour
 
     private void Update()
     {
-        if(boxIsColl)
+        if(boxIsColl && !inCollid)
         {
             triggeurBox.SetActive(true);
+            inCollid = true;
         }
     }
 }

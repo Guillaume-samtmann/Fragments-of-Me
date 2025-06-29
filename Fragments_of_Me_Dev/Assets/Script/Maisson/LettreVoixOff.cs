@@ -7,7 +7,6 @@ public class LettreVoixOff : MonoBehaviour
     public AudioSource voixOff1;
     public PickupItem pickupItem;
     private bool voixOffJouee = false;
-    public MonoBehaviour FirstPersonScript;
 
     void Update()
     {
@@ -21,7 +20,7 @@ public class LettreVoixOff : MonoBehaviour
             voixOff1.Play();
             StartCoroutine(AttendreFinAudio());
             voixOffJouee = true;
-            FirstPersonScript.enabled = false;
+            //FirstPersonScript.enabled = false;
         }
     }
 
@@ -29,6 +28,6 @@ public class LettreVoixOff : MonoBehaviour
     {
         yield return new WaitForSeconds(voixOff1.clip.length);
         pickupItem.heldVersion.SetActive(false);
-        FirstPersonScript.enabled = true;
+        //FirstPersonScript.enabled = true;
     }
 }

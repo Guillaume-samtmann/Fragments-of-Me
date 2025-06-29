@@ -7,6 +7,10 @@ public class OpenBox : MonoBehaviour
     public Text objText;
 
     public GameObject couvercle;
+    public GameObject lettreMere;
+    public GameObject OpenBoxTrig;
+    public GameObject TabInventaireLettreMere;
+    public MonoBehaviour FirstPersonScript;
 
     private void OnTriggerStay(Collider other)
     {
@@ -22,8 +26,13 @@ public class OpenBox : MonoBehaviour
         if(canOpen && Input.GetKeyDown(KeyCode.E))
         {
             couvercle.SetActive(false);
+            //lettreMere.transform.SetParent(null);
+            //OpenBoxTrig.SetActive(false);
+            //rbBox.useGravity = false;
+            TabInventaireLettreMere.SetActive(true);
+            FirstPersonScript.enabled = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
     }
-
-
 }

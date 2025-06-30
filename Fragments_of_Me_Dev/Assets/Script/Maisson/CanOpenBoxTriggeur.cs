@@ -5,15 +5,22 @@ using UnityEngine.UI;
 public class CanOpenBoxTriggeur : MonoBehaviour
 {
     public CamRaycast camRaycast;
-    public PickupItem currentItem;
+    public PickupItem currentItemMere;
+    public PickupItem currentItemPere;
 
-    private bool isCollTriggeur = false;
-    public bool boxIsColl = false;
-    private bool inCollid = false;
+    private bool isCollTriggeurMere = false;
+    public bool boxIsCollMere = false;
+    private bool inCollidMere = false;
+    public GameObject triggeurBoxMere;
+
+    private bool isCollTriggeurPere = false;
+    public bool boxIsCollPere = false;
+    private bool inCollidPere = false;
+    public GameObject triggeurBoxPere;
 
     public Text objText;
     public TextMeshProUGUI inscrution;
-    public GameObject triggeurBox;
+    
 
     private void Start()
     {
@@ -24,22 +31,31 @@ public class CanOpenBoxTriggeur : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isCollTriggeur = true;
+            isCollTriggeurMere = true;
             camRaycast.canDrop = true;
         }
 
         if (other.gameObject.name == "box-mere")
         {
-            boxIsColl = true;
+            boxIsCollMere = true;
+        }
+
+        if (other.gameObject.name == "box-pere")
+        {
+            boxIsCollPere = true;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (currentItem.isHeld)
+        if (currentItemMere.isHeld)
         {
             objText.text = "(F) relacher";
-        }else
+        }else if (currentItemPere.isHeld)
+        {
+            objText.text = "(F) relacher";
+        }
+        else
         {
             objText.text = "";
         }
@@ -48,14 +64,21 @@ public class CanOpenBoxTriggeur : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         camRaycast.canDrop = true;
+        objText.text = "";
     }
 
     private void Update()
     {
-        if(boxIsColl && !inCollid)
+        if(boxIsCollMere && !inCollidMere)
         {
-            triggeurBox.SetActive(true);
-            inCollid = true;
+            triggeurBoxMere.SetActive(true);
+            inCollidMere = true;
+        }
+
+        if (boxIsCollPere && !inCollidPere)
+        {
+            triggeurBoxPere.SetActive(true);
+            inCollidPere = true;
         }
     }
 }

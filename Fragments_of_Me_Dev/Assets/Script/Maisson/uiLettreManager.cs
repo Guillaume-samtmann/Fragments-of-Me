@@ -6,25 +6,40 @@ public class uiLettreManager : MonoBehaviour
     public AudioSource voixOff1;
     private bool voixOffJouee = false;
     public MonoBehaviour FirstPersonScript;
-    public GameObject TabInventaireLettreMere;
+    public GameObject TabInventaireLettre;
+    public GameObject BoxPere;
+    public GameObject introduction;
 
     public void loadLettreMere()
     {
         voixOff1.Play();
         StartCoroutine(AttendreFinAudio());
         voixOffJouee = true;
-        FirstPersonScript.enabled = false;
+    }
+
+    public void loadLettrePere()
+    {
+        voixOff1.Play();
+        StartCoroutine(AttendreFinAudio2());
+        voixOffJouee = true;
     }
 
     IEnumerator AttendreFinAudio()
     {
         yield return new WaitForSeconds(voixOff1.clip.length);
-        FirstPersonScript.enabled = true;
+        BoxPere.SetActive(true);
+    }
+
+    IEnumerator AttendreFinAudio2()
+    {
+        yield return new WaitForSeconds(voixOff1.clip.length);
+        introduction.SetActive(true);
+        TabInventaireLettre.SetActive(false);
     }
 
     public void close()
     {
-        TabInventaireLettreMere.SetActive(false);
+        TabInventaireLettre.SetActive(false);
         FirstPersonScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

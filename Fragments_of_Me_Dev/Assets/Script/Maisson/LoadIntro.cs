@@ -1,36 +1,20 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadIntro : MonoBehaviour
 {
-    public CamRaycast camRaycast;
-    public AudioSource voixOff1;
-    public PickupItem pickupItem;
-    private bool voixOffJouee = false;
-    public MonoBehaviour FirstPersonScript;
-    public GameObject introduction;
-
-    void Update()
+    private void Start()
     {
-        if (pickupItem.isHeld && !voixOffJouee)
+        if(gameObject.activeInHierarchy)
         {
-            camRaycast.canDrop = false;
-            if (voixOff1 == null)
-            {
-                voixOff1 = GetComponent<AudioSource>();
-            }
-            voixOff1.Play();
-            StartCoroutine(AttendreFinAudio());
-            voixOffJouee = true;
-            FirstPersonScript.enabled = false;
+            StartCoroutine(loadIsland());
         }
     }
 
-    IEnumerator AttendreFinAudio()
+    IEnumerator loadIsland()
     {
-        yield return new WaitForSeconds(voixOff1.clip.length);
-        pickupItem.heldVersion.SetActive(false);
-        FirstPersonScript.enabled = true;
-        introduction.SetActive(true);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(4);
     }
 }

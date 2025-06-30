@@ -71,9 +71,11 @@ public class UiOrdinateur : MonoBehaviour
     IEnumerator loadDiscussion()
     {
         loadCoroutine = false;
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(25);
         discussion.SetActive(true);
         yield return new WaitForSeconds(5);
         discussion.SetActive(false);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(3);
     }
 }

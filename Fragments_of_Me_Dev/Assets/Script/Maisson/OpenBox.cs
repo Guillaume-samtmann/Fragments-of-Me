@@ -21,6 +21,11 @@ public class OpenBox : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        canOpen = false;
+    }
+
     private void Update()
     {
         if(canOpen && Input.GetKeyDown(KeyCode.E))
@@ -33,6 +38,7 @@ public class OpenBox : MonoBehaviour
             FirstPersonScript.enabled = false;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            Debug.Log(canOpen);
         }
     }
 }
